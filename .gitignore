@@ -1,0 +1,5 @@
+# Python utility files
+__pycache__/
+
+# My testing files
+*main.py
