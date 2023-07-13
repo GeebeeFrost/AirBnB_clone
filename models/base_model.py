@@ -33,8 +33,10 @@ class BaseModel:
 
     def to_dict(self):
         """Returns a dictionary containing contents of __dict__"""
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
+        self.created_at = self.created_at.isoformat() if (
+                type(self.created_at) is datetime) else self.created_at
+        self.updated_at = self.updated_at.isoformat() if (
+                type(self.updated_at) is datetime) else self.updated_at
         rep = {k: v for k, v in self.__dict__.items()}
         rep['__class__'] = self.__class__.__name__
         return rep

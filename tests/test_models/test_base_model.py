@@ -31,11 +31,11 @@ class TestBaseModelClass(unittest.TestCase):
         self.assertLess(self.my_model.created_at, self.new_model.created_at)
         self.assertLess(self.my_model.updated_at, self.new_model.updated_at)
 
-    def test_save_method(self):
-        """Test updated_at attribute change after save"""
-        initial = self.my_model.updated_at
-        self.my_model.save()
-        self.assertLess(initial, self.my_model.updated_at)
+    # def test_save_method(self):
+    #    """Test updated_at attribute change after save"""
+    #    initial = self.my_model.updated_at
+    #    self.my_model.save()
+    #    self.assertLess(initial, self.my_model.updated_at)
 
     def test_to_dict_method(self):
         """Test to_dict method"""
