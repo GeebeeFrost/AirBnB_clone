@@ -11,10 +11,12 @@ class BaseModel:
         """Creates a new BaseModel instance"""
         if kwargs and len(kwargs) > 0:
             for k, v in kwargs.items():
-                if k != "__class__":
+                if k == "created_at":
+                    self.__dict__["created_at"] = datetime.fromisoformat(v)
+                elif k == "updated_at":
+                    self.__dict__["updated_at"] = datetime.fromisoformat(v)
+                elif k != "__class__":
                     setattr(self, k, v)
-            self.created_at = datetime.fromisoformat(self.created_at)
-            self.updated_at = datetime.fromisoformat(self.updated_at)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -33,10 +35,8 @@ class BaseModel:
 
     def to_dict(self):
         """Returns a dictionary containing contents of __dict__"""
-        self.created_at = self.created_at.isoformat() if (
-                type(self.created_at) is datetime) else self.created_at
-        self.updated_at = self.updated_at.isoformat() if (
-                type(self.updated_at) is datetime) else self.updated_at
-        rep = {k: v for k, v in self.__dict__.items()}
-        rep['__class__'] = self.__class__.__name__
-        return rep
+        res = self.__dict__.copy()
+        res['__class__'] = type(self).__name__
+        res["created_at"] = res["created_at"].isoformat()
+        res["updated_at"] = res["updated_at"].isoformat()
+        return res
