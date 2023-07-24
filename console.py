@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
                         pass
                 setattr(storage.all()[key], attr, val)
                 storage.all()[key].save()
-    
+
     def do_count(self, line):
         """Counts the instances of a class.
         """
