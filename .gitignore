@@ -1,5 +1,6 @@
 # Python utility files
 __pycache__/
+.vscode/
 
 # My testing files
 *main.py
